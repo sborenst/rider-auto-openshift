@@ -154,7 +154,7 @@ under the License.
       <id>MyNexus</id>
       <mirrorOf>*</mirrorOf>
       <name>My cool nexus mirror.</name>
-      <url>http://nexus-sharednexus.cloudapps-cfc0.oslab.opentlc.com/groups/public</url>
+      <url>http://nexus-sharednexus.cloudapps-cfc0.oslab.opentlc.com/content/groups/public</url>
     </mirror>
 
   </mirrors>
