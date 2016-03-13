@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor
-	license agreements. See the NOTICE file distributed with this work for additional
-	information regarding copyright ownership. The ASF licenses this file to
-	You under the Apache License, Version 2.0 (the "License"); you may not use
-	this file except in compliance with the License. You may obtain a copy of
-	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required
-	by applicable law or agreed to in writing, software distributed under the
-	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
-	OF ANY KIND, either express or implied. See the License for the specific
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
 	language governing permissions and limitations under the License. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -45,7 +45,8 @@
 		<docker.port.container.jolokia>8778</docker.port.container.jolokia>
 		<karaf.version>2.4.0.redhat-621084</karaf.version>
 		<karaf.plugin.version>4.0.2.redhat-621079</karaf.plugin.version>
-		<spring.features.version>3.0.4</spring.features.version>
+		<spring.features.version>4.0.4</spring.features.version> <!-- TODO does this need to change? -->
+		<spring.version>4.1.4.RELEASE</spring.version>
 	</properties>
 
 	<dependencyManagement>
@@ -68,6 +69,50 @@
 				<groupId>org.fusesource.examples</groupId>
 				<artifactId>rider-auto-common</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<!-- camel-test-spring has the wrong version of spring
+			in transitive dependency. Override here for now -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -113,7 +158,29 @@
 		<repository>
 			<id>fuse-releases</id>
 			<name>JBoss Fuse Release Repository</name>
-			<url>https://repository.jboss.org/nexus/content/repositories/fs-releases/</url>
+			<url>https://maven.repository.redhat.com/nexus/content/repositories/fs-releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>redhat-releases</id>
+			<name>JBoss Fuse Release Repository</name>
+			<url>https://maven.repository.redhat.com/nexus/content/groups/product-ga</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>redhat-ea-releases</id>
+			<name>JBoss Fuse Release Repository</name>
+			<url>https://maven.repository.redhat.com/nexus/content/repositories/ea/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -126,7 +193,40 @@
 		<pluginRepository>
 			<id>fuse-releases</id>
 			<name>JBoss Fuse Release Repository</name>
-			<url>https://repository.jboss.org/nexus/content/repositories/fs-releases/</url>
+			<url>https://maven.repository.redhat.com/ga/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>redhat-ga</id>
+			<name>Red Hat Release Repository</name>
+			<url>https://maven.repository.redhat.com/nexus/content/groups/product-ga</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>redhat-fs-release</id>
+			<name>JBoss Community Early Access Release Repository</name>
+			<url>https://maven.repository.redhat.com/nexus/content/repositories/fs-releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>redhat-ea</id>
+			<name>JBoss Community Early Access Release Repository</name>
+			<url>https://maven.repository.redhat.com/nexus/content/repositories/ea/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
