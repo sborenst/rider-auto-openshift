@@ -31,7 +31,7 @@
 		<module>rider-auto-ose-installer</module>
 	</modules>
 
-	<properties>		
+	<properties>
 		<fabric8.version>2.2.0.redhat-079</fabric8.version>
 		<fuse.version>6.2.1.redhat-084</fuse.version>
 		<camel-version>2.15.1.redhat-621084</camel-version>
@@ -47,12 +47,12 @@
 		<karaf.plugin.version>4.0.2.redhat-621079</karaf.plugin.version>
 		<spring.features.version>4.0.4</spring.features.version> <!-- TODO does this need to change? -->
 		<spring.version>4.1.4.RELEASE</spring.version>
-		
+
 		<sonar.language>java</sonar.language>
 		<sonar.url>${sonar.url}</sonar.url>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.junit.reportsPath>${project.build.directory}/surefire-reports/</sonar.junit.reportsPath>
-		
+
 	</properties>
 
 	<dependencyManagement>
@@ -138,7 +138,14 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.4.3</version>
+					<version>2.19.1</version>
+					<configuration>
+						<configuration>
+							<forkCount>3</forkCount>
+							<reuseForks>true</reuseForks>
+							<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+						</configuration>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.camel</groupId>
