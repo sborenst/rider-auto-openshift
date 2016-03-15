@@ -31,7 +31,7 @@
 		<module>rider-auto-ose-installer</module>
 	</modules>
 
-	<properties>
+	<properties>		
 		<fabric8.version>2.2.0.redhat-079</fabric8.version>
 		<fuse.version>6.2.1.redhat-084</fuse.version>
 		<camel-version>2.15.1.redhat-621084</camel-version>
@@ -47,6 +47,12 @@
 		<karaf.plugin.version>4.0.2.redhat-621079</karaf.plugin.version>
 		<spring.features.version>4.0.4</spring.features.version> <!-- TODO does this need to change? -->
 		<spring.version>4.1.4.RELEASE</spring.version>
+		
+		<sonar.language>java</sonar.language>
+		<sonar.host.url>${sonar.url}</sonar.host.url>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.junit.reportsPath>${project.build.directory}/surefire-reports/</sonar.junit.reportsPath>
+		
 	</properties>
 
 	<dependencyManagement>
@@ -70,8 +76,8 @@
 				<artifactId>rider-auto-common</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			<!-- camel-test-spring has the wrong version of spring
-			in transitive dependency. Override here for now -->
+			<!-- camel-test-spring has the wrong version of spring in transitive dependency. 
+				Override here for now -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
@@ -132,7 +138,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.4.3</version>
+					<version>2.19.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.camel</groupId>
@@ -149,6 +155,11 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>1.10</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.0.1</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
