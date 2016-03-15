@@ -49,7 +49,7 @@
 		<spring.version>4.1.4.RELEASE</spring.version>
 		
 		<sonar.language>java</sonar.language>
-		<sonar.host.url>${sonar.url}</sonar.host.url>
+		<sonar.url>${sonar.url}</sonar.url>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.junit.reportsPath>${project.build.directory}/surefire-reports/</sonar.junit.reportsPath>
 		
